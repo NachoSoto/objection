@@ -2,7 +2,7 @@
 
 @interface Engine : NSObject
 {
-  BOOL awake;  
+  BOOL awake;
 }
 @property(nonatomic) BOOL awake;
 
@@ -45,6 +45,18 @@
 @end
 
 @interface SixSpeedCar : Car<ManualCar>
+@end
+
+@interface MissingOptionalDependenciesCar : NSObject
+
+@property (nonatomic, retain) UnregisteredCar *car;
+
+@end
+
+@interface MissingDependenciesCar : NSObject
+
+@property (nonatomic, retain) UnregisteredCar *car;
+
 @end
 
 @interface CarFactory : NSObject

@@ -46,6 +46,26 @@ objection_register(SixSpeedCar)
 @synthesize gearBox;
 @end
 
+@implementation MissingOptionalDependenciesCar
+
+objection_register(MissingOptionalDependenciesCar)
+
+- (BOOL)requiresAllDependencies {
+    return NO;
+}
+
+@end
+
+@implementation MissingDependenciesCar
+
+objection_register(MissingOptionalDependenciesCar)
+
+- (BOOL)requiresAllDependencies {
+    return YES;
+}
+
+@end
+
 @implementation CarFactory
 objection_register_singleton(CarFactory)
 @end
