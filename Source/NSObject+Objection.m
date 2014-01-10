@@ -5,4 +5,8 @@
 - (void)awakeFromObjection {
   
 }
+
+- (BOOL)objectionRequiresAllDependencies {
+    return YES;
+}
 @end
