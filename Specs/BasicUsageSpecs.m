@@ -114,6 +114,26 @@ it(@"calls awakeFromObjection when an object has been constructed", ^{
       assertThatBool([car awake], equalToBool(YES));
 });
 
+it(@"does not throw if requiresAllDependencies is NO and it misses some dependencies", ^{
+    __block MissingOptionalDependenciesCar *car = nil;
+    
+    [[theBlock(^{
+        car = [[JSObjection defaultInjector] getObject:[MissingOptionalDependenciesCar class]];
+    }) shouldNot] raise];
+
+    assertThat(car, isNot(nilValue()));
+    assertThat(car.car, is(nilValue()));
+});
+
+it(@"does not throw if requiresAllDependencies is NO and it has all dependencies", ^{
+    __block MissingOptionalDependenciesCar *car = nil;
+    
+    [JSObjection registerClass:[UnregisteredCar class] scope:JSObjectionScopeNormal];
+    
+    [[theBlock(^{
+        car = [[JSObjection defaultInjector] getObject:[MissingDependenciesCar class]];
+    }) shouldNot] raise];
+});
 
 describe(@"object factory", ^{
     it(@"injector returns a JSObjectFactory for the given injector context", ^{
